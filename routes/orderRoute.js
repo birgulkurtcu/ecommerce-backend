@@ -23,6 +23,7 @@ orderRouter.post('/razorpay', authUser, placeOrderRazorpay)
 orderRouter.post('/userorders', authUser, userOrders)
 //Verify Payment
 orderRouter.post('/verifyStripe' , authUser, verifyStripe)
+orderRouter.post('/verifyRazorpay' , authUser, verifyRazorpay)
 
 export default orderRouter;
 
