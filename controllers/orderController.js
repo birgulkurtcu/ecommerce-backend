@@ -137,6 +137,16 @@ const placeOrderRazorpay = async (req, res) => {
         res.json({success:false, message: error.message})
     }
 }
+const verifyRazorpay = async (req, res) => {
+    try {
+        const {userId, razorpay_order_id} = req.body
+        const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id)
+        console.log(orderInfo)
+    }catch(error){
+        console.log(error);
+        res.json({success:false, message: error.message})
+    }
+}
 //All Orders data for Admin Panel
 const allOrders = async (req, res) => {
     try {
@@ -170,4 +180,4 @@ const updateStatus = async (req, res) => {
         res.json({success: false, message: error.message})
     }
 }
-export {verifyStripe, placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, updateStatus, userOrders}
+export {verifyRazorpay, verifyStripe, placeOrder, placeOrderStripe, placeOrderRazorpay, allOrders, updateStatus, userOrders}
