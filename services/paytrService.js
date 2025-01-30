@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import fetch from 'node-fetch'; // Eğer fetch kullanıyorsanız
+import fetch from 'node-fetch';
 
 export const getPaytrToken = async (paymentData) => {
     try {
@@ -9,16 +9,16 @@ export const getPaytrToken = async (paymentData) => {
         const test_mode = process.env.TEST_MODE || '0';
 
         const {
-            email,
-            payment_amount,
-            user_name,
-            user_address,
-            user_phone,
-            user_ip,
-            user_basket
+            email = "est@test.com",
+            payment_amount= "10000",
+            user_name= "test",
+            user_address = "adresssss",
+            user_phone= "1234567890",
+            user_ip ="127.0.0.1",
+            user_basket ="[['Item1', '10.00', 1], ['Item2', '20.00', 1]]",
         } = paymentData;
 
-        const merchant_oid = "IN" + Date.now(); // Sipariş numarası
+        const merchant_oid = "IN" + Date.now();
         const max_installment = '0';
         const no_installment = '0';
         const currency = 'TL';
@@ -96,6 +96,5 @@ export const validatePaytrCallback = (callbackData) => {
     if (calculatedToken !== hash) {
         throw new Error("Hash mismatch! PayTR notification might be tampered.");
     }
-
-    return true; // Hash doğrulandıysa true döner
+    return true;
 };
