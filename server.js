@@ -8,6 +8,18 @@ import productRouter from './routes/productRoute.js'
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 import paytrRouter from "./routes/paytrRoute.js";
+import path, {dirname} from "path";
+import ejsLayouts from 'express-ejs-layouts';
+import { fileURLToPath } from 'url';
+
+// PAYTR
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const viewsPath = path.join(__dirname, '/app_server/views');
+console.log("viewsPath", viewsPath);
+
+
 
 //App Config
 const port = process.env.PORT || 3000
@@ -15,6 +27,14 @@ const app = express();
 
 connectDB()
 connectCloudinary()
+
+app.set('views', path.join(__dirname, '/app_server/views'));
+
+app.use(express.urlencoded({ extended: true }));
+
+app.set('views', viewsPath);
+app.set('view engine', 'ejs');
+app.use(ejsLayouts);
 
 //middlewares
 app.use(express.json())
