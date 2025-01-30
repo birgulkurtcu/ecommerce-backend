@@ -1,4 +1,5 @@
 import { getPaytrToken, validatePaytrCallback } from "../services/paytrService.js";
+import {render} from "ejs";
 
 // PayTR Token isteği
 export const requestPaytrToken = async (req, res) => {
@@ -7,7 +8,8 @@ export const requestPaytrToken = async (req, res) => {
         const data = await getPaytrToken(paymentData);
 
         if (data.status === 'success') {
-            res.json({ success: true, token: data.token });
+            res.render('layout', { iframetoken: req.query.token });
+
         } else {
             res.status(400).json({ success: false, message: data.reason });
         }
