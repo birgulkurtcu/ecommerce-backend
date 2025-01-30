@@ -1,9 +1,9 @@
 import express from 'express';
 import {handlePaytrCallback, requestPaytrToken} from '../controllers/paytrController.js';
 
-const router = express.Router();
+const paytrRouter = express.Router();
 
-router.post('/get-token', requestPaytrToken);
-router.post('/callback', handlePaytrCallback);
+paytrRouter.post('/get-token', requestPaytrToken);
+paytrRouter.post('/callback', handlePaytrCallback);
 
-export default router;
+export default paytrRouter
